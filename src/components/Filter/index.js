@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { TextField, MenuItem } from "@mui/material";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -16,7 +17,7 @@ const Filter = ({ rule, config, showFilterDelete, onChange, onDelete }) => {
           id="query-select"
           select
           className="bg-gray-700 rounded-md w-full p-0"
-          value={field}
+          value={field || ""}
         >
           {fields.map(({ name, label }) => (
             <MenuItem
@@ -35,7 +36,7 @@ const Filter = ({ rule, config, showFilterDelete, onChange, onDelete }) => {
           id="query-select"
           select
           className="bg-gray-700 rounded-md w-full p-0"
-          value={condition}
+          value={condition || ""}
         >
           {conditions.map(({ name, label }) => (
             <MenuItem
@@ -54,7 +55,7 @@ const Filter = ({ rule, config, showFilterDelete, onChange, onDelete }) => {
           id="query-select"
           select
           className="bg-gray-700 rounded-md w-full"
-          value={criteria}
+          value={criteria || ""}
         >
           {criteriaList.map((option) => (
             <MenuItem
@@ -77,6 +78,14 @@ const Filter = ({ rule, config, showFilterDelete, onChange, onDelete }) => {
       )}
     </div>
   );
+};
+
+Filter.propTypes = {
+  rule: PropTypes.object.isRequired,
+  config: PropTypes.object.isRequired,
+  showFilterDelete: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Filter;

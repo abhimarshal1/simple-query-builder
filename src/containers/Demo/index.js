@@ -4,15 +4,17 @@ import React, { useState } from "react";
 import QueryBuilder from "../../components/QueryBuilder";
 
 // Constants
-import { queryBuilderConfig as config} from "./constants";
+import { queryBuilderConfig as config } from "./constants";
 
-const Playground = () => {
-  const [isOpen, setIsOpen] = useState(true);
+const Demo = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const setOpen = () => setIsOpen(true);
 
-  const setClose = () => setIsOpen(false);
-
+  const onFinish = (query) => {
+    console.log(query);
+    setIsOpen(false);
+  };
   return (
     <div className="flex justify-center items-center h-full font-mono">
       <button
@@ -21,9 +23,11 @@ const Playground = () => {
       >
         Create Query
       </button>
-      {isOpen && <QueryBuilder config={config} onFinish={setClose} returnAs="string" />}
+      {isOpen && (
+        <QueryBuilder config={config} onFinish={onFinish}  />
+      )}
     </div>
   );
 };
 
-export default Playground;
+export default Demo;

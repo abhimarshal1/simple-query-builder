@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { MdAdd, MdDeleteOutline } from "react-icons/md";
 
 // Components
@@ -11,23 +12,21 @@ const FilterGroup = ({
   handleDelete,
   onFilterChange,
   onFilterAdd,
-  onFilterDelete
+  onFilterDelete,
 }) => {
   return (
     <div className="flex items-center gap-8 mb-3">
       <div className="bg-gray-800 flex-none w-220 p-4 rounded-md border border-gray-500">
         <div className="flex flex-col gap-2">
           {rules.map((rule, index) => (
-            <>
-              <Filter
-                key={rule}
-                rule={rule}
-                config={config}
-                onChange={onFilterChange}
-                showFilterDelete={index !== 0}
-                onDelete={onFilterDelete}
-              />
-            </>
+            <Filter
+              key={JSON.stringify(rule)}
+              rule={rule}
+              config={config}
+              onChange={onFilterChange}
+              showFilterDelete={index !== 0}
+              onDelete={onFilterDelete}
+            />
           ))}
         </div>
         <button
@@ -47,6 +46,16 @@ const FilterGroup = ({
       )}
     </div>
   );
+};
+
+FilterGroup.propTypes = {
+  rules: PropTypes.array.isRequired,
+  config: PropTypes.object.isRequired,
+  showDelete: PropTypes.bool.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  onFilterAdd: PropTypes.func.isRequired,
+  onFilterDelete: PropTypes.func.isRequired,
 };
 
 export default FilterGroup;

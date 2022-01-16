@@ -1,7 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 
-const index = ({combinators, selectedCombinator, handleCombinatorToggle}) => {
+const CombinatorToggle = ({
+  combinators,
+  selectedCombinator,
+  handleCombinatorToggle,
+}) => {
   return (
     <ToggleButtonGroup
       id="combinator-toggle"
@@ -23,4 +28,10 @@ const index = ({combinators, selectedCombinator, handleCombinatorToggle}) => {
   );
 };
 
-export default index;
+CombinatorToggle.propTypes = {
+  combinators: PropTypes.array.isRequired,
+  selectedCombinator: PropTypes.object.isRequired,
+  handleCombinatorToggle: PropTypes.func.isRequired,
+};
+
+export default CombinatorToggle;

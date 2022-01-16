@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 // Components
 import FilterGroup from "../FilterGroup";
@@ -7,7 +8,7 @@ import CombinatorToggle from "../CombinatorToggle";
 // Utils
 import { getUniqueId, getInitialState, buildQuery } from "./utils";
 
-const QueryBuilder = ({ onFinish, config, returnAs = "string" }) => {
+const QueryBuilder = ({ onFinish, config, returnAsString }) => {
   const { combinators } = config;
 
   const [selectedCombinator, setSelectedCombinator] = React.useState(
@@ -39,11 +40,15 @@ const QueryBuilder = ({ onFinish, config, returnAs = "string" }) => {
   };
 
   const handleFinish = () => {
-    const combinatorSH = combinators.find(
-      (c) => c.name === selectedCombinator.name
-    ).shorthand;
-    console.log(buildQuery(config.conditions, data, combinatorSH));
-    // onFinish();
+    if (returnAsString) {
+      const combinatorSH = combinators.find(
+        (c) => c.name === selectedCombinator.name
+      ).shorthand;
+      onFinish(buildQuery(config.conditions, data, combinatorSH));
+    } else {
+      const obj = { ...data, combinator: selectedCombinator.name };
+      onFinish(obj);
+    }
   };
 
   const handleCombinatorToggle = (e) => {
@@ -61,8 +66,6 @@ const QueryBuilder = ({ onFinish, config, returnAs = "string" }) => {
       return newData;
     });
   };
-
-  console.log(data);
 
   const handleFilterAdd = (index) => {
     setData((prev) => {
@@ -113,7 +116,7 @@ const QueryBuilder = ({ onFinish, config, returnAs = "string" }) => {
             <>
               {data.map((rules, index) => (
                 <FilterGroup
-                  key={rules}
+                  key={JSON.stringify(rules)}
                   showDelete={index !== 0}
                   rules={rules}
                   config={config}
@@ -152,6 +155,12 @@ const QueryBuilder = ({ onFinish, config, returnAs = "string" }) => {
       </div>
     </div>
   );
+};
+
+QueryBuilder.propTypes = {
+  onFinish: PropTypes.func.isRequired,
+  config: PropTypes.object.isRequired,
+  returnAsString: PropTypes.bool,
 };
 
 export default QueryBuilder;
