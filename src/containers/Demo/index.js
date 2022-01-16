@@ -24,7 +24,7 @@ const Demo = () => {
         Create Query
       </button>
       {isOpen && (
-        <QueryBuilder config={config} onFinish={onFinish}  />
+        <QueryBuilder config={config} onFinish={onFinish} returnAsString />
       )}
     </div>
   );
