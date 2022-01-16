@@ -8,7 +8,7 @@ Query Builder is a config driven query builder. The underlying UI framework is <
 
 ## Live Demo
 
-https://simple-query-builder-abhishek.netlify.app//
+https://simple-query-builder-abhishek.netlify.app/
 
 ## Tech Stack
 
