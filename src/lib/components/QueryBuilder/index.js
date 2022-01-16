@@ -8,7 +8,7 @@ import CombinatorToggle from "../CombinatorToggle";
 // Utils
 import { getUniqueId, getInitialState, buildQuery } from "./utils";
 
-const QueryBuilder = ({ onFinish, config, returnAsString }) => {
+const QueryBuilder = ({ onFinish, onCancel, config, returnAsString }) => {
   const { combinators } = config;
 
   const [selectedCombinator, setSelectedCombinator] = React.useState(
@@ -141,7 +141,7 @@ const QueryBuilder = ({ onFinish, config, returnAsString }) => {
         <div className="bg-gray-900 absolute bottom-0 footer w-full px-5 py-5 flex justify-between items-end">
           <button
             className="px-4 py-2 bg-gray-600 text-white font-medium rounded-lg shadow-sm hover:bg-primary-200"
-            onClick={handleFinish}
+            onClick={onCancel}
           >
             Cancel
           </button>
@@ -159,6 +159,7 @@ const QueryBuilder = ({ onFinish, config, returnAsString }) => {
 
 QueryBuilder.propTypes = {
   onFinish: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
   returnAsString: PropTypes.bool,
 };

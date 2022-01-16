@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Components
-import QueryBuilder from "../../components/QueryBuilder";
+import QueryBuilder from "../../lib/components/QueryBuilder";
 
 // Constants
 import { queryBuilderConfig as config } from "./constants";
@@ -11,10 +11,13 @@ const Demo = () => {
 
   const setOpen = () => setIsOpen(true);
 
+  const setClose = () => setIsOpen(false);
+
   const onFinish = (query) => {
     console.log(query);
-    setIsOpen(false);
+    setClose();
   };
+
   return (
     <div className="flex justify-center items-center h-full font-mono">
       <button
@@ -24,7 +27,12 @@ const Demo = () => {
         Create Query
       </button>
       {isOpen && (
-        <QueryBuilder config={config} onFinish={onFinish} returnAsString />
+        <QueryBuilder
+          config={config}
+          onFinish={onFinish}
+          onCancel={setClose}
+          returnAsString
+        />
       )}
     </div>
   );
