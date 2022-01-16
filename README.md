@@ -1,4 +1,4 @@
-# JSON Form Builder
+# Simple Query Builder
 
 The repo contains the source code for the query builder. This is a demo around the POC.
 
